@@ -10,7 +10,7 @@ import Img5 from "../assets/img5.jpeg"
 import Bg from "../assets/bg.png"
 import CommonButton from "../common/Button";
 import ProductAction from "../common/ProductAction";
-import ProductButton from "../common/Productbutton";
+import ProductButton from "../common/ProductButton";
 import { useCart } from "../context/CartContext";
 
 
