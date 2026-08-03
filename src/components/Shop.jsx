@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Nintendo from "../assets/nintendo-.png"
-import Watch from "../assets/Watch.png"
+import Watch from "../assets/watch.png"
 
 const categories = [
   {

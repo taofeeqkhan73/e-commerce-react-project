@@ -2,16 +2,16 @@
 import React, { useState } from "react";
 import { FaBars, FaChevronDown } from "react-icons/fa";
 import menuImg from "../assets/menu.avif";
-import Viewsonic from "../assets/Viewsonic.jpg"
-import Transcend from "../assets/Transcend.jpg"
-import Samsung from "../assets/Samsung.jpg"
-import Philips from "../assets/Philips.jpg"
+import Viewsonic from "../assets/viewsonic.jpg"
+import Transcend from "../assets/transcend.jpg"
+import Samsung from "../assets/samsung.jpg"
+import Philips from "../assets/philips.jpg"
 import Lg from "../assets/lg.jpg"
-import Kodak from "../assets/Kodak.jpg"
-import Hp from "../assets/Hp.jpg"
-import Gigabyte from "../assets/Gigabyte.jpg"
-import Dell from "../assets/Dell.jpg"
-import Games from "../assets/Games.jpg"
+import Kodak from "../assets/kodak.jpg"
+import Hp from "../assets/hp.jpg"
+import Gigabyte from "../assets/gigabyte.jpg"
+import Dell from "../assets/dell.jpg"
+import Games from "../assets/games.jpg"
 import Headphones from "../assets/headphones.jpg"
 import PrinterImg from "../assets/printer.webp"
 
