@@ -123,7 +123,7 @@ const Features = () => {
         {featureData.map((item) => (
           <div
             key={item.id}
-            className="flex items-center px-3 py-10"
+            className="flex items-center px-3 py-5"
           >
             <img
               src={item.image}
