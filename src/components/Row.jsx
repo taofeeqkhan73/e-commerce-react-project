@@ -55,7 +55,7 @@ const Features = () => {
   };
 
   return (
-    <div className="w-full px-4 py-10">
+    <div className="w-full px-4 py-5">
 
       {/* ================= Mobile ================= */}
       <div className="lg:hidden overflow-hidden">
@@ -65,11 +65,10 @@ const Features = () => {
           <button
             onClick={prevSlide}
             disabled={currentIndex === 0}
-            className={`absolute left-3 top-1/2 -translate-y-1/2 z-10 ${
-              currentIndex === 0
+            className={`absolute left-3 top-1/2 -translate-y-1/2 z-10 ${currentIndex === 0
                 ? "opacity-40 cursor-not-allowed"
                 : ""
-            }`}
+              }`}
           >
             <FaChevronLeft className="text-white text-xl" />
           </button>
@@ -109,11 +108,10 @@ const Features = () => {
           <button
             onClick={nextSlide}
             disabled={currentIndex === featureData.length - 1}
-            className={`absolute right-3 top-1/2 -translate-y-1/2 z-10 ${
-              currentIndex === featureData.length - 1
+            className={`absolute right-3 top-1/2 -translate-y-1/2 z-10 ${currentIndex === featureData.length - 1
                 ? "opacity-40 cursor-not-allowed"
                 : ""
-            }`}
+              }`}
           >
             <FaChevronRight className="text-white text-xl" />
           </button>
@@ -125,20 +123,20 @@ const Features = () => {
         {featureData.map((item) => (
           <div
             key={item.id}
-            className="flex items-center px-3 py-5"
+            className="flex items-center px-0 py-5"
           >
             <img
               src={item.image}
               alt={item.title}
-              className="ml-5"
+              className="ml-6"
             />
 
             <div className="ml-4">
-              <h2 className="text-lg text-white">
+              <h2 className="text-xs lg:text-sm xl:text-base font-medium text-white">
                 {item.title}
               </h2>
 
-              <p className="text-lg text-white mt-2">
+              <p className="text-[11px] lg:text-xs xl:text-sm text-white mt-1">
                 {item.description}
               </p>
             </div>
