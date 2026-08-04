@@ -277,7 +277,7 @@ const Nav = () => {
         .auth-submit-btn {
           width: 100%;
           padding: 14px;
-          background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
+          background: linear-gradient(135deg, #ff6a00);
           color: #fff;
           font-size: 15px;
           font-weight: 700;
@@ -1018,11 +1018,9 @@ const Nav = () => {
                       />
                     </div>
                   </div>
-                ) : (
-                  <p style={{ fontSize: 13, color: "#10b981", fontWeight: 600, marginBottom: 16 }}>
-                    🎉 You've qualified for free shipping!
-                  </p>
-                )}
+               ) : (
+                <hr style={{ border: "none", borderTop: "1px solid #f3f4f6", marginBottom: 16 }} />
+              )}
 
                 <button
                   onClick={handleViewCart}
