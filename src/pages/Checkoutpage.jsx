@@ -11,7 +11,7 @@ const parsePrice = (price) => {
   return 0;
 };
 
-const formatRand = (amount) => `R${amount.toFixed(2).replace(".", ",")}`;
+const formatRand = (amount) => `₹${amount.toFixed(2).replace(".", ",")}`;
 
 const PAYMENT_METHODS = [
   { id: "card", label: "Credit / Debit Card" },
