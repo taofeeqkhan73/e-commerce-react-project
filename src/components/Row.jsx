@@ -123,22 +123,23 @@ const Features = () => {
         {featureData.map((item) => (
           <div
             key={item.id}
-            className="flex items-center px-3 py-5"
+            className="flex items-center px-0 py-5"
           >
             <img
               src={item.image}
               alt={item.title}
               className="ml-6"
             />
-<div className="ml-4">
-  <h2 className="text-sm lg:text-base xl:text-lg font-medium text-white">
-    {item.title}
-  </h2>
 
-  <p className="text-xs lg:text-sm xl:text-base text-white mt-1">
-    {item.description}
-  </p>
-</div>
+            <div className="ml-4">
+              <h2 className="text-xs lg:text-sm xl:text-base font-medium text-white">
+                {item.title}
+              </h2>
+
+              <p className="text-[11px] lg:text-xs xl:text-sm text-white mt-1">
+                {item.description}
+              </p>
+            </div>
           </div>
         ))}
       </div>
