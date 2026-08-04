@@ -141,7 +141,7 @@ export default function Dashboard() {
                 image: "https://m.media-amazon.com/images/I/61L5QgPvgqL._SL1500_.jpg",
                 title: "Apple MacBook Pro 13” M2",
                 description: "Computer, Laptops, MacBook",
-                price: "R1299,00 – R1499,00"
+                price: "1299,00 – 1499,00"
             },
 
             {
@@ -149,7 +149,7 @@ export default function Dashboard() {
                 image: "https://ivos.co.za/wp-content/uploads/2025/01/apple-macbook-pro-16-silver-1.jpg",
                 title: "Apple MacBook Pro 16” M1pro",
                 description: "Computer, Laptops, MacBook",
-                price: "R2499,00 – R2999,00"
+                price: "2499,00 – 2999,00"
             },
 
             {
@@ -157,14 +157,14 @@ export default function Dashboard() {
                 image: "https://ivos.co.za/wp-content/uploads/2025/01/asus-zenbook-oled-13-1.jpg",
                 title: "ASUS ZenBook OLED 13",
                 description: "Laptops, Business Laptop, Computer",
-                price: "R1600,00"
+                price: "1600,00"
             },
             {
                 id: 4,
                 image: "https://ivos.co.za/wp-content/uploads/2025/01/asus-zenbook-pro-15-flip-1.jpg",
                 title: "ASUS ZenBook Pro 15 Flip",
                 description: "Computer, Laptops, Ultrabook",
-                price: "R2320,00"
+                price: "2320,00"
             },
 
             { id: 5, image: "https://ivos.co.za/wp-content/uploads/2025/11/Gemini_Generated_Image_sxyi4asxyi4asxyi-300x127.jpeg", title: "Keyboard", price: "₹999" },
@@ -229,7 +229,7 @@ export default function Dashboard() {
             id: 1,
             title: "Apple MacBook Pro 13”",
             category: "Computer, Laptops, MacBook",
-            price: "R1299,00, R1499,00",
+            price: "₹1299,00, ₹1499,00",
             image:
                 "https://m.media-amazon.com/images/I/61L5QgPvgqL._SL1500_.jpg",
 
@@ -238,7 +238,7 @@ export default function Dashboard() {
             id: 2,
             title: "Apple MacBook Pro 16”",
             category: "Computer, Laptops, MacBook",
-            price: "R2499,00 - R2999,00",
+            price: "₹2499,00 - ₹2999,00",
             image:
                 "https://ivos.co.za/wp-content/uploads/2025/01/apple-macbook-pro-16-silver-1.jpg",
             hot: true,
@@ -247,7 +247,7 @@ export default function Dashboard() {
             id: 3,
             title: "ASUS ZenBook OLED",
             category: ["Laptops, Business Laptop, Computer"],
-            price: "R1600,00",
+            price: "₹1600,00",
             image:
                 "https://m.media-amazon.com/images/I/71f5Eu5lJSL._SL1500_.jpg",
             hot: true,
@@ -274,16 +274,17 @@ export default function Dashboard() {
         {
             id: 1,
             title: "Apple",
-            category: "R1499,00-",
-            price: "R1299,00",
+            category: "₹1499,00–",
+            price: "₹1299,00",
+           
             image:
                 "https://ivos.co.za/wp-content/uploads/2025/01/apple-macbook-pro-13-space-gray-1.jpg",
         },
         {
             id: 2,
             title: "Apple",
-            category: "R2499,00-",
-            price: "R2999,00",
+            category: "₹2499,00-",
+            price: "₹2999,00",
             image:
                 "https://ivos.co.za/wp-content/uploads/2025/01/apple-macbook-pro-16-silver-1.jpg",
         },
@@ -291,7 +292,7 @@ export default function Dashboard() {
             id: 3,
             title: "ASUS ZenBook",
             // category: "Laptop",
-            price: "R1600.00",
+            price: "₹1600.00",
             image:
                 "https://ivos.co.za/wp-content/uploads/2025/01/asus-zenbook-oled-13-1.jpg",
         },
@@ -299,7 +300,7 @@ export default function Dashboard() {
             id: 4,
             title: "ASUS ZenBook",
             // category: "Laptop",
-            price: "R2320.00",
+            price: "₹2320.00",
             image:
                 "https://ivos.co.za/wp-content/uploads/2025/01/asus-zenbook-pro-15-flip-1.jpg",
         },
@@ -307,7 +308,7 @@ export default function Dashboard() {
             id: 5,
             title: "Asus-laptop",
             // category: "Laptop",
-            price: "R500.00",
+            price: "₹500.00",
             image:
                 "https://ivos.co.za/wp-content/uploads/2025/01/apple-macbook-pro-13-space-gray-1.jpg",
         },
@@ -315,7 +316,7 @@ export default function Dashboard() {
             id: 6,
             title: "Bamix",
             // category: "Laptop",
-            price: "R605.00",
+            price: "₹605.00",
             image:
                 "https://ivos.co.za/wp-content/uploads/2025/01/apple-macbook-pro-16-silver-1.jpg",
         },
@@ -352,7 +353,7 @@ export default function Dashboard() {
             <div className="col-span-1 flex flex-col gap-5 sm:gap-8">
 
                 {/* Top Slider */}
-                <div className="  h-[64vh] sm:h-[30vh] bg-white relative  rounded-xl shadow overflow-hidden group">
+                <div className="  h-[64vh] sm:h-[40vh] bg-white relative  rounded-xl shadow overflow-hidden group">
                     <h1 className="text-lg sm:text-2xl font-bold ml-4 mt-5">Recently viewed</h1>
                     {/* Image + Text */}
                     <div className=" flex items-start h-full px-3 gap-4 pt-4">
@@ -427,7 +428,7 @@ export default function Dashboard() {
 
                             <div className="relative z-10  flex flex-col justify-between p-4 sm:p-6 text-center pt-8 sm:pt-10">
                                 <div>
-                                    <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold">
+                                    <h1 className="text-2xl sm:text-4xl lg:text-4xl font-bold">
                                         {item.title}
                                     </h1>
 
@@ -455,7 +456,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* ======================Second Slider ==================*/}
-                <div className="h-auto sm:h-[30vh] bg-white rounded-xl shadow flex items-start justify-start pb-4 sm:pb-0">
+                <div className="h-auto sm:h-[40vh] bg-white rounded-xl shadow flex items-start justify-start pb-4 sm:pb-0">
                     {filterData.map((section) => (
                         <div key={`filter-${section.id}`}>
                             {/* Heading */}
@@ -490,7 +491,7 @@ export default function Dashboard() {
                 </div>
 
                 {/*========================Third Slider========================= */}
-                <div className="  h-[64vh] sm:h-[30vh] bg-white relative  rounded-xl shadow overflow-hidden group">
+                <div className="  h-[64vh] sm:h-[40vh] bg-white relative  rounded-xl shadow overflow-hidden group">
                     <h1 className="text-lg sm:text-2xl font-bold ml-4 mt-5">Latest products</h1>
                     {/* Image + Text */}
                     <div className=" flex items-start h-full px-3 gap-4 pt-4">
@@ -612,7 +613,7 @@ export default function Dashboard() {
                         <div
                             key={`${activeTab}-${item.id}`}
                             onClick={() => addToCart(item)}
-                            className="relative group bg-white rounded-xl shadow hover:shadow-lg overflow-hidden h-[64vh] cursor-pointer"
+                            className="relative group bg-white rounded-xl shadow hover:shadow-lg overflow-hidden cursor-pointer"
                         >
 
                             <img
@@ -630,7 +631,7 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     addToCart(item);
                                 }}
-                                className="absolute bottom-48 left-0"
+                                className="absolute bottom-52 left-0"
                             />
                             {(item.id === 1 || item.id === 2) && (
                                 <div className="my-6 sm:my-8 flex justify-center gap-2">

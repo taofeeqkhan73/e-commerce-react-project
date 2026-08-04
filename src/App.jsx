@@ -14,6 +14,8 @@ import Footer from './components/Footer';
 import MyAccount from './pages/MyAccount';
 import Product from "./pages/Product";
 
+import CartPage from "./pages/Cartpage";
+import Checkout from "./pages/Checkoutpage";
 import './App.css'
 
 const Home = () => {
@@ -40,6 +42,10 @@ function App() {
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/login" element={<Navigate to="/my-account" replace />} />
         <Route path="/register" element={<Navigate to="/my-account?action=register" replace />} />
+        {/* nav notification card page */}
+    
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/checkout" element={<Checkout />} />
         {/* shop section */}
         <Route path="/" element={<Home />} />
         <Route path="/product/:slug" element={<Product />}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useCart } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import logoImg from "../assets/logo.png";
 import {
@@ -20,10 +20,8 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 
-// Free shipping threshold used for the progress bar on the cart drawer.
 const FREE_SHIPPING_THRESHOLD = 2000;
 
-// Helper to safely turn a price (number or string like "R75.00") into a number
 const parsePrice = (price) => {
   if (typeof price === "number") return price;
   if (typeof price === "string") {
@@ -33,29 +31,25 @@ const parsePrice = (price) => {
   return 0;
 };
 
-// Formats a number as "R75,00" (Rand style, comma decimal)
 const formatRand = (amount) => {
-  return `R${amount.toFixed(2).replace(".", ",")}`;
+  return `₹${amount.toFixed(2).replace(".", ",")}`;
 };
 
 const Nav = () => {
   const { cart, removeFromCart } = useCart();
   const { user, login, register, logout } = useUser();
+  const navigate = useNavigate();
 
-  // Drawer state
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [drawerContent, setDrawerContent] = useState("auth"); // "auth" | "cart"
+  const [drawerContent, setDrawerContent] = useState("auth");
 
-  // Auth tab: "login" | "register"
   const [authTab, setAuthTab] = useState("login");
 
-  // Login form state
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [showLoginPass, setShowLoginPass] = useState(false);
   const [loginError, setLoginError] = useState("");
 
-  // Register form state
   const [regName, setRegName] = useState("");
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
@@ -63,6 +57,28 @@ const Nav = () => {
   const [showRegPass, setShowRegPass] = useState(false);
   const [showRegConfirmPass, setShowRegConfirmPass] = useState(false);
   const [regError, setRegError] = useState("");
+
+  // ── Toast (add-to-cart notification) state ──
+  const [toast, setToast] = useState({ show: false, title: "" });
+  const prevCartLength = useRef(cart.length);
+  const toastTimer = useRef(null);
+
+  useEffect(() => {
+    if (cart.length > prevCartLength.current) {
+      const lastItem = cart[cart.length - 1];
+      setToast({ show: true, title: lastItem?.title || "Item" });
+
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+      toastTimer.current = setTimeout(() => {
+        setToast({ show: false, title: "" });
+      }, 2500);
+    }
+    prevCartLength.current = cart.length;
+
+    return () => {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+    };
+  }, [cart.length, cart]);
 
   // ── Handlers ──────────────────────────────────────────────
   const openAuthDrawer = (tab = "login") => {
@@ -79,6 +95,16 @@ const Nav = () => {
   };
 
   const closeDrawer = () => setDrawerOpen(false);
+
+  const handleViewCart = () => {
+    closeDrawer();
+    navigate("/cart");
+  };
+
+  const handleCheckout = () => {
+    closeDrawer();
+    navigate("/checkout");
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -116,7 +142,6 @@ const Nav = () => {
     closeDrawer();
   };
 
-  // Cart calculations
   const subtotal = cart.reduce(
     (sum, item) => sum + parsePrice(item.price) * (item.quantity || 1),
     0
@@ -130,10 +155,8 @@ const Nav = () => {
     100
   );
 
-  // ── Render ─────────────────────────────────────────────────
   return (
     <>
-      {/* ─── Inline styles for auth drawer animations ─── */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -177,7 +200,6 @@ const Nav = () => {
           transform: translateX(0);
         }
 
-        /* Tab pill */
         .auth-tab-bar {
           display: flex;
           background: #f3f4f6;
@@ -207,7 +229,6 @@ const Nav = () => {
           box-shadow: 0 2px 12px rgba(255,106,0,0.35);
         }
 
-        /* Input group */
         .auth-input-group {
           position: relative;
           margin-bottom: 16px;
@@ -253,7 +274,6 @@ const Nav = () => {
         }
         .auth-input-right-btn:hover { color: #ff6a00; }
 
-        /* Submit button */
         .auth-submit-btn {
           width: 100%;
           padding: 14px;
@@ -279,7 +299,6 @@ const Nav = () => {
         }
         .auth-submit-btn:active { transform: scale(0.98); }
 
-        /* Google button */
         .auth-google-btn {
           width: 100%;
           padding: 12px 16px;
@@ -299,7 +318,6 @@ const Nav = () => {
         }
         .auth-google-btn:hover { background: #f9fafb; border-color: #d1d5db; }
 
-        /* Divider */
         .auth-divider {
           display: flex;
           align-items: center;
@@ -315,7 +333,6 @@ const Nav = () => {
           background: #e5e7eb;
         }
 
-        /* Error */
         .auth-error {
           background: #fff1f2;
           border: 1px solid #fca5a5;
@@ -329,7 +346,6 @@ const Nav = () => {
           gap: 8px;
         }
 
-        /* Label */
         .auth-label {
           display: block;
           font-size: 13px;
@@ -338,7 +354,6 @@ const Nav = () => {
           margin-bottom: 6px;
         }
 
-        /* Drawer header */
         .auth-drawer-header {
           display: flex;
           align-items: center;
@@ -362,7 +377,6 @@ const Nav = () => {
         }
         .auth-close-btn:hover { background: #e5e7eb; }
 
-        /* Brand accent */
         .auth-brand-strip {
           height: 4px;
           background: linear-gradient(90deg, #ff6a00, #ee0979, #ff6a00);
@@ -374,7 +388,6 @@ const Nav = () => {
           100% { background-position: 200% 0%; }
         }
 
-        /* Welcome illustration area */
         .auth-welcome {
           padding: 0 24px 8px 24px;
           margin-bottom: 20px;
@@ -391,7 +404,6 @@ const Nav = () => {
           margin: 0;
         }
 
-        /* Password strength */
         .pass-strength-bar {
           height: 3px;
           border-radius: 999px;
@@ -399,7 +411,6 @@ const Nav = () => {
           transition: width 0.3s, background 0.3s;
         }
 
-        /* Checkbox */
         .auth-check-row {
           display: flex;
           align-items: center;
@@ -423,7 +434,6 @@ const Nav = () => {
         }
         .auth-forgot-link:hover { text-decoration: underline; }
 
-        /* Switch prompt */
         .auth-switch-prompt {
           text-align: center;
           font-size: 13px;
@@ -438,7 +448,6 @@ const Nav = () => {
         }
         .auth-switch-link:hover { text-decoration: underline; }
 
-        /* My Account drawer */
         .account-avatar {
           width: 72px;
           height: 72px;
@@ -453,6 +462,70 @@ const Nav = () => {
           box-shadow: 0 4px 18px rgba(255,106,0,0.3);
           margin: 0 auto 12px auto;
         }
+
+        /* ── Add-to-cart toast ── */
+        .cart-toast {
+          position: fixed;
+          top: 24px;
+          right: 24px;
+          z-index: 60;
+          background: #fff;
+          border-radius: 14px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+          padding: 16px 20px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          min-width: 280px;
+          max-width: 340px;
+          font-family: 'Inter', sans-serif;
+          border-left: 4px solid #ff6a00;
+          transform: translateX(120%);
+          opacity: 0;
+          transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+        }
+        .cart-toast.show {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        .cart-toast-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #ff6a00, #ee0979);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          flex-shrink: 0;
+          font-size: 15px;
+        }
+        .cart-toast-text {
+          flex: 1;
+        }
+        .cart-toast-title {
+          font-size: 13px;
+          font-weight: 700;
+          color: #111827;
+          margin: 0 0 2px 0;
+        }
+        .cart-toast-sub {
+          font-size: 12px;
+          color: #6b7280;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .cart-toast-close {
+          background: none;
+          border: none;
+          color: #9ca3af;
+          cursor: pointer;
+          padding: 2px;
+          flex-shrink: 0;
+        }
+        .cart-toast-close:hover { color: #374151; }
       `}</style>
 
       {/* ─── Navbar ─────────────────────────────────────────── */}
@@ -460,7 +533,6 @@ const Nav = () => {
         <div className="max-w-full mx-auto px-4 lg:px-6 py-2">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
-            {/* Logo */}
             <div className="flex justify-center lg:justify-start">
               <Link to="/">
                 <img
@@ -471,7 +543,6 @@ const Nav = () => {
               </Link>
             </div>
 
-            {/* Search */}
             <div className="w-full lg:w-2/4">
               <div className="relative">
                 <input
@@ -485,10 +556,8 @@ const Nav = () => {
               </div>
             </div>
 
-            {/* Right Side */}
             <div className="flex flex-wrap justify-center lg:justify-end items-center gap-5 text-white">
 
-              {/* Login / Register  →  opens drawer */}
               <div className="flex items-center gap-2 font-bold text-lg">
                 {user ? (
                   <button
@@ -547,14 +616,11 @@ const Nav = () => {
       {/* ─── Drawer Panel ─────────────────────────────────────── */}
       <div className={`auth-drawer-panel ${drawerOpen ? "open" : "closed"}`}>
 
-        {/* Animated brand strip at top */}
         <div className="auth-brand-strip" />
 
-        {/* ── AUTH DRAWER (Login / Register) ── */}
         {drawerContent === "auth" && (
           <>
             {user ? (
-              /* ── My Account View ── */
               <>
                 <div className="auth-drawer-header">
                   <h2 style={{ fontSize: 18, fontWeight: 700, color: "#111827", margin: 0 }}>
@@ -625,7 +691,6 @@ const Nav = () => {
                 </div>
               </>
             ) : (
-              /* ── Login / Register Tabs ── */
               <>
                 <div className="auth-drawer-header">
                   <div style={{ display: "flex", flexDirection: "column" }}>
@@ -639,7 +704,6 @@ const Nav = () => {
                   </button>
                 </div>
 
-                {/* Tab pills */}
                 <div className="auth-tab-bar">
                   <button
                     className={`auth-tab-btn ${authTab === "login" ? "active" : ""}`}
@@ -657,10 +721,8 @@ const Nav = () => {
                   </button>
                 </div>
 
-                {/* ── LOGIN FORM ── */}
                 {authTab === "login" && (
                   <div style={{ padding: "0 24px 24px 24px" }}>
-                    {/* Google */}
                     <button type="button" className="auth-google-btn">
                       <FaGoogle style={{ color: "#4285F4", fontSize: 16 }} />
                       Continue with Google
@@ -676,7 +738,6 @@ const Nav = () => {
                         </div>
                       )}
 
-                      {/* Email */}
                       <label className="auth-label">
                         Email address <span style={{ color: "#ef4444" }}>*</span>
                       </label>
@@ -692,7 +753,6 @@ const Nav = () => {
                         />
                       </div>
 
-                      {/* Password */}
                       <label className="auth-label">
                         Password <span style={{ color: "#ef4444" }}>*</span>
                       </label>
@@ -716,7 +776,6 @@ const Nav = () => {
                         </button>
                       </div>
 
-                      {/* Remember / Forgot */}
                       <div className="auth-check-row">
                         <label className="auth-check-label">
                           <input type="checkbox" style={{ accentColor: "#ff6a00" }} />
@@ -743,10 +802,8 @@ const Nav = () => {
                   </div>
                 )}
 
-                {/* ── REGISTER FORM ── */}
                 {authTab === "register" && (
                   <div style={{ padding: "0 24px 24px 24px" }}>
-                    {/* Google */}
                     <button type="button" className="auth-google-btn">
                       <FaGoogle style={{ color: "#4285F4", fontSize: 16 }} />
                       Continue with Google
@@ -762,7 +819,6 @@ const Nav = () => {
                         </div>
                       )}
 
-                      {/* Full Name */}
                       <label className="auth-label">
                         Full Name <span style={{ color: "#ef4444" }}>*</span>
                       </label>
@@ -778,7 +834,6 @@ const Nav = () => {
                         />
                       </div>
 
-                      {/* Email */}
                       <label className="auth-label">
                         Email address <span style={{ color: "#ef4444" }}>*</span>
                       </label>
@@ -794,7 +849,6 @@ const Nav = () => {
                         />
                       </div>
 
-                      {/* Password */}
                       <label className="auth-label">
                         Password <span style={{ color: "#ef4444" }}>*</span>
                       </label>
@@ -818,7 +872,6 @@ const Nav = () => {
                         </button>
                       </div>
 
-                      {/* Password strength bar */}
                       {regPassword && (
                         <div
                           className="pass-strength-bar"
@@ -830,7 +883,6 @@ const Nav = () => {
                         />
                       )}
 
-                      {/* Confirm Password */}
                       <label className="auth-label">
                         Confirm Password <span style={{ color: "#ef4444" }}>*</span>
                       </label>
@@ -876,10 +928,8 @@ const Nav = () => {
           </>
         )}
 
-        {/* ── CART DRAWER ── */}
         {drawerContent === "cart" && (
           <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-            {/* Header */}
             <div className="auth-drawer-header">
               <h2 style={{ fontSize: 18, fontWeight: 700, color: "#111827", margin: 0 }}>
                 Shopping Cart
@@ -890,7 +940,6 @@ const Nav = () => {
               </button>
             </div>
 
-            {/* Cart items */}
             <div style={{ flex: 1, overflowY: "auto", padding: "0 24px" }}>
               {cart.length === 0 ? (
                 <div style={{ textAlign: "center", padding: "48px 0", color: "#9ca3af" }}>
@@ -943,10 +992,8 @@ const Nav = () => {
               )}
             </div>
 
-            {/* Cart footer */}
             {cart.length > 0 && (
               <div style={{ borderTop: "1px solid #f3f4f6", padding: "20px 24px" }}>
-                {/* Subtotal */}
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 14 }}>
                   <span style={{ fontWeight: 700, color: "#111827" }}>Subtotal:</span>
                   <span style={{ color: "#ff6a00", fontWeight: 700, fontSize: 17 }}>
@@ -954,7 +1001,6 @@ const Nav = () => {
                   </span>
                 </div>
 
-                {/* Free shipping progress */}
                 {amountLeftForFreeShipping > 0 ? (
                   <div style={{ marginBottom: 16 }}>
                     <p style={{ fontSize: 12, color: "#6b7280", marginBottom: 8 }}>
@@ -979,6 +1025,7 @@ const Nav = () => {
                 )}
 
                 <button
+                  onClick={handleViewCart}
                   style={{
                     width: "100%",
                     padding: 13,
@@ -991,10 +1038,13 @@ const Nav = () => {
                     marginBottom: 10,
                     fontSize: 14,
                   }}
+                  onMouseEnter={e => e.currentTarget.style.background = "#e5e7eb"}
+                  onMouseLeave={e => e.currentTarget.style.background = "#f3f4f6"}
                 >
                   View Cart
                 </button>
                 <button
+                  onClick={handleCheckout}
                   className="auth-submit-btn"
                   style={{ marginTop: 0 }}
                 >
@@ -1004,6 +1054,23 @@ const Nav = () => {
             )}
           </div>
         )}
+      </div>
+
+      {/* ─── Add-to-Cart Toast ─────────────────────────────────── */}
+      <div className={`cart-toast ${toast.show ? "show" : ""}`}>
+        <div className="cart-toast-icon">
+          <FaCheckCircle size={16} />
+        </div>
+        <div className="cart-toast-text">
+          <p className="cart-toast-title">Added to cart!</p>
+          <p className="cart-toast-sub">{toast.title}</p>
+        </div>
+        <button
+          className="cart-toast-close"
+          onClick={() => setToast({ show: false, title: "" })}
+        >
+          <FaTimes size={12} />
+        </button>
       </div>
     </>
   );

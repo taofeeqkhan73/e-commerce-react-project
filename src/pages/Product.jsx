@@ -209,7 +209,7 @@ export default function Product() {
               {hasSecondParagraph && (
                 <button
                   onClick={() => setShowMore(!showMore)}
-                  className="mt-8 bg-white shadow px-8 py-4 rounded-full hover:bg-black hover:text-white transition-all duration-300"
+                  className="mt-8 bg-white shadow px-8 py-4 rounded-full hover:bg-gray-200 hover:text-black transition-all duration-300"
                 >
                   {showMore ? "Read Less" : "Read More"}
                 </button>
