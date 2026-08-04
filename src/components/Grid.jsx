@@ -141,7 +141,7 @@ export default function Dashboard() {
                 image: "https://m.media-amazon.com/images/I/61L5QgPvgqL._SL1500_.jpg",
                 title: "Apple MacBook Pro 13” M2",
                 description: "Computer, Laptops, MacBook",
-                price: "1299,00 – 1499,00"
+                price: "₹1299,00 – 1499,00"
             },
 
             {
@@ -149,7 +149,7 @@ export default function Dashboard() {
                 image: "https://ivos.co.za/wp-content/uploads/2025/01/apple-macbook-pro-16-silver-1.jpg",
                 title: "Apple MacBook Pro 16” M1pro",
                 description: "Computer, Laptops, MacBook",
-                price: "2499,00 – 2999,00"
+                price: "₹2499,00 – 2999,00"
             },
 
             {
@@ -157,14 +157,14 @@ export default function Dashboard() {
                 image: "https://ivos.co.za/wp-content/uploads/2025/01/asus-zenbook-oled-13-1.jpg",
                 title: "ASUS ZenBook OLED 13",
                 description: "Laptops, Business Laptop, Computer",
-                price: "1600,00"
+                price: "₹1600,00"
             },
             {
                 id: 4,
                 image: "https://ivos.co.za/wp-content/uploads/2025/01/asus-zenbook-pro-15-flip-1.jpg",
                 title: "ASUS ZenBook Pro 15 Flip",
                 description: "Computer, Laptops, Ultrabook",
-                price: "2320,00"
+                price: "₹2320,00"
             },
 
             { id: 5, image: "https://ivos.co.za/wp-content/uploads/2025/11/Gemini_Generated_Image_sxyi4asxyi4asxyi-300x127.jpeg", title: "Keyboard", price: "₹999" },
