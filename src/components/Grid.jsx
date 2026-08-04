@@ -353,7 +353,7 @@ export default function Dashboard() {
             <div className="col-span-1 flex flex-col gap-5 sm:gap-8">
 
                 {/* Top Slider */}
-                <div className="  h-[64vh] sm:h-[40vh] bg-white relative  rounded-xl shadow overflow-hidden group">
+                <div className="  h-[64vh] sm:h-[30vh] bg-white relative  rounded-xl shadow overflow-hidden group">
                     <h1 className="text-lg sm:text-2xl font-bold ml-4 mt-5">Recently viewed</h1>
                     {/* Image + Text */}
                     <div className=" flex items-start h-full px-3 gap-4 pt-4">
@@ -456,7 +456,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* ======================Second Slider ==================*/}
-                <div className="h-auto sm:h-[40vh] bg-white rounded-xl shadow flex items-start justify-start pb-4 sm:pb-0">
+                <div className="h-auto sm:h-[30vh] bg-white rounded-xl shadow flex items-start justify-start pb-4 sm:pb-0">
                     {filterData.map((section) => (
                         <div key={`filter-${section.id}`}>
                             {/* Heading */}
@@ -491,7 +491,7 @@ export default function Dashboard() {
                 </div>
 
                 {/*========================Third Slider========================= */}
-                <div className="  h-[64vh] sm:h-[40vh] bg-white relative  rounded-xl shadow overflow-hidden group">
+                <div className="  h-[64vh] sm:h-[30vh] bg-white relative  rounded-xl shadow overflow-hidden group">
                     <h1 className="text-lg sm:text-2xl font-bold ml-4 mt-5">Latest products</h1>
                     {/* Image + Text */}
                     <div className=" flex items-start h-full px-3 gap-4 pt-4">

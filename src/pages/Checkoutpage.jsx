@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { FaCheckCircle } from "react-icons/fa";
 
 const parsePrice = (price) => {
   if (typeof price === "number") return price;
@@ -34,13 +35,14 @@ const initialForm = {
 };
 
 const Checkout = () => {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const navigate = useNavigate();
 
   const [form, setForm] = useState(initialForm);
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const subtotal = cart.reduce(
     (sum, item) => sum + parsePrice(item.price) * (item.quantity || 1),
@@ -88,8 +90,18 @@ const Checkout = () => {
 
     setTimeout(() => {
       setSubmitting(false);
-      navigate("/order-confirmation");
+      setShowSuccessPopup(true);
     }, 800);
+  };
+
+  const handleDone = () => {
+    setShowSuccessPopup(false);
+    clearCart();
+    navigate("/");
+  };
+
+  const handleCancel = () => {
+    setShowSuccessPopup(false);
   };
 
   const inputClass = (field) =>
@@ -339,6 +351,41 @@ const Checkout = () => {
           </button>
         </div>
       </div>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+        >
+          <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full mx-4 p-8 text-center">
+            <div className="flex justify-center mb-5">
+              <FaCheckCircle className="text-green-500" size={64} />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Order Placed Successfully!
+            </h2>
+            <p className="text-gray-500 text-sm mb-8">
+              Thank you for your purchase. We've received your order and
+              will start processing it right away.
+            </p>
+
+            <div className="flex gap-3">
+              <button
+                onClick={handleCancel}
+                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-3.5 rounded-xl font-semibold transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDone}
+                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3.5 rounded-xl font-semibold transition"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -16,6 +16,8 @@ import Product from "./pages/Product";
 
 import CartPage from "./pages/Cartpage";
 import Checkout from "./pages/Checkoutpage";
+
+
 import './App.css'
 
 const Home = () => {
@@ -50,6 +52,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/product/:slug" element={<Product />}
         />
+
 
       </Routes>
       <Footer />
