@@ -111,7 +111,7 @@ export default function Footer() {
         <footer className="bg-[#1c1c1c] text-gray-300 px-6 py-10 md:px-10 ml-2">
             <div className="max-w-7xl mx-auto">
                 {/* Top grid */}
-                <div className="grid grid-cols-2 md:grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_2fr] gap-8 text-[18px]">  
+                <div className="grid grid-cols-2 md:grid-cols-[0.8fr_0.8fr_0.8fr_0.8fr_2fr] gap-8 text-[18px]">
                     <FooterColumn title="Company" links={companyLinks} />
                     <FooterColumn title="Secure Payments" links={securePaymentLinks} />
                     <FooterColumn title="Sell On IVOS" links={sellOnIvosLinks} />
@@ -185,7 +185,9 @@ export default function Footer() {
                 </div>
 
                 {/* Divider */}
-                <hr className="w-screen border-gray-700 my-8 relative left-1/2 -translate-x-1/2 ml-5" />
+                <div className="px-2 md:px-0">
+                    <hr className="w-full border-gray-700 my-8 md:relative md:left-1/2 md:-translate-x-1/2 " />
+                </div>
 
                 {/* Bottom row */}
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 relative">
